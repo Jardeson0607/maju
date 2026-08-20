@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Maju ✨</title>
+  <title>Maju do Jacim ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', 'Segoe UI', sans-serif;
-      touch-action: none; /* Garante resposta instantânea ao toque */
+      touch-action: none;
     }
 
     body {
@@ -18,149 +18,161 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle at center, #2b0938 0%, #0d0118 100%);
+      background: radial-gradient(circle at center, #1b0728 0%, #08010e 100%);
       overflow: hidden;
       user-select: none;
     }
 
-    .container {
-      text-align: center;
-      position: relative;
+    canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
       z-index: 1;
-      pointer-events: none; /* Deixa o toque passar para o fundo */
     }
 
-    /* Nome MAJU */
+    /* Card Glassmorphism */
+    .card {
+      position: relative;
+      z-index: 2;
+      padding: 50px 70px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 50px rgba(255, 42, 133, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.05);
+      text-align: center;
+      animation: floatCard 4s ease-in-out infinite;
+    }
+
+    /* Anel de luz orbital giratório atrás do texto */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 30px;
+      background: conic-gradient(from 0deg, transparent 0%, #ff2a85 25%, transparent 50%, #7928ca 75%, transparent 100%);
+      z-index: -1;
+      animation: rotateGlow 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    /* Tipografia de MAJU */
     .nome-maju {
-      font-size: clamp(3.5rem, 14vw, 8.5rem);
-      font-weight: 900;
-      letter-spacing: 8px;
-      text-transform: uppercase;
-      background: linear-gradient(45deg, #ff2a85, #ff7300, #ff0055, #ffd000);
-      background-size: 300% 300%;
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: clamp(3.5rem, 12vw, 7rem);
+      font-weight: 700;
+      letter-spacing: 6px;
+      background: linear-gradient(135deg, #fff 0%, #ffb6c1 40%, #ff2a85 70%, #ffd700 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 25px rgba(255, 42, 133, 0.7));
-      animation: float 3s ease-in-out infinite, gradientShift 6s ease infinite;
-      display: inline-block;
+      filter: drop-shadow(0 0 20px rgba(255, 42, 133, 0.6));
+      line-height: 1.1;
     }
 
-    .estrela {
-      display: inline-block;
-      font-size: 1.8rem;
-      animation: spin 4s linear infinite;
-    }
-
-    /* Frase MAJU DO JACIM */
+    /* Tipografia da frase */
     .frase-jacim {
+      font-family: 'Montserrat', sans-serif;
       margin-top: 15px;
-      font-size: clamp(1.4rem, 5vw, 2.3rem);
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: #fff;
-      text-shadow: 
-        0 0 7px #ff2a85,
-        0 0 10px #ff2a85,
-        0 0 21px #ff2a85,
-        0 0 42px #ff0055;
-      animation: piscar 1.2s ease-in-out infinite alternate, pulsar 2s ease-in-out infinite;
+      font-size: clamp(0.9rem, 3.5vw, 1.4rem);
+      font-weight: 600;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: #f7e6ff;
+      text-shadow: 0 0 10px rgba(255, 42, 133, 0.8), 0 0 20px rgba(121, 40, 202, 0.6);
+      animation: pulseText 2s ease-in-out infinite alternate;
     }
 
-    /* Partículas do rastro estilo cobra */
-    .cobra-ponto {
-      position: fixed;
-      pointer-events: none;
-      font-size: 1.4rem;
-      transform: translate(-50%, -50%);
-      animation: sumirCobra 0.7s forwards ease-out;
-      z-index: 2;
-      filter: drop-shadow(0 0 6px #ff007f);
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
     }
 
-    /* Animações */
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(-1deg); }
-      50% { transform: translateY(-18px) rotate(2deg); }
-    }
-
-    @keyframes spin {
+    @keyframes rotateGlow {
       100% { transform: rotate(360deg); }
     }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes piscar {
-      0%, 18%, 22%, 25%, 53%, 57%, 100% {
-        opacity: 1;
-        text-shadow: 
-          0 0 7px #ff2a85,
-          0 0 10px #ff2a85,
-          0 0 21px #ff2a85,
-          0 0 42px #ff0055;
-      }
-      20%, 24%, 55% {
-        opacity: 0.35;
-        text-shadow: none;
-      }
-    }
-
-    @keyframes pulsar {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.06); }
-    }
-
-    @keyframes sumirCobra {
-      0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.2);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.2);
-      }
+    @keyframes pulseText {
+      0% { opacity: 0.7; transform: scale(0.98); }
+      100% { opacity: 1; transform: scale(1.02); }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <div>
-      <span class="estrela">✨</span>
-      <h1 class="nome-maju">MAJU</h1>
-      <span class="estrela">✨</span>
-    </div>
-    <p class="frase-jacim">💖 MAJU DO JACIM 💖</p>
+  <canvas id="trailCanvas"></canvas>
+
+  <div class="card">
+    <h1 class="nome-maju">MAJU</h1>
+    <p class="frase-jacim">Maju do Jacim</p>
   </div>
 
   <script>
-    const emojis = ['💖', '✨', '🌸', '💫'];
+    const canvas = document.getElementById('trailCanvas');
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
 
-    function criarRastro(x, y) {
-      const ponto = document.createElement('span');
-      ponto.className = 'cobra-ponto';
-      ponto.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-      ponto.style.left = x + 'px';
-      ponto.style.top = y + 'px';
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
 
-      document.body.appendChild(ponto);
+    const particles = [];
+    const colors = ['#ff2a85', '#ff7300', '#ffd700', '#c77dff', '#ffffff'];
 
-      setTimeout(() => {
-        ponto.remove();
-      }, 700);
+    function addParticle(x, y) {
+      for (let i = 0; i < 3; i++) {
+        particles.push({
+          x: x + (Math.random() - 0.5) * 10,
+          y: y + (Math.random() - 0.5) * 10,
+          size: Math.random() * 6 + 2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          alpha: 1,
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2
+        });
+      }
     }
 
-    // Eventos para celular (touch) e computador (mouse)
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= 0.025;
+        p.size *= 0.96;
+
+        if (p.alpha <= 0 || p.size <= 0.5) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = p.alpha;
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = p.color;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
     window.addEventListener('touchmove', (e) => {
       const touch = e.touches[0];
-      criarRastro(touch.clientX, touch.clientY);
+      addParticle(touch.clientX, touch.clientY);
     });
 
     window.addEventListener('mousemove', (e) => {
-      criarRastro(e.clientX, e.clientY);
+      addParticle(e.clientX, e.clientY);
     });
   </script>
 </body>
