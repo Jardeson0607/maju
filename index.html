@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Maju do Jacim ✨</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+  <title>Maju do Jacim 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -18,161 +18,139 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle at center, #1b0728 0%, #08010e 100%);
+      background: linear-gradient(135deg, #ffeef8 0%, #e8f0fe 50%, #fdf2f8 100%);
       overflow: hidden;
       user-select: none;
     }
 
-    canvas {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
+    /* Nuvens decorativas de fundo */
+    .nuvem {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50px;
+      filter: blur(8px);
+      z-index: 0;
+      animation: flutuarNuvem 18s infinite linear;
     }
 
-    /* Card Glassmorphism */
-    .card {
+    .nuvem-1 { width: 140px; height: 50px; top: 15%; left: -150px; animation-duration: 22s; }
+    .nuvem-2 { width: 200px; height: 70px; bottom: 20%; left: -220px; animation-duration: 28s; animation-delay: 5s; }
+
+    /* Card Fofo */
+    .card-fofo {
       position: relative;
       z-index: 2;
-      padding: 50px 70px;
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 0 50px rgba(255, 42, 133, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.85);
+      padding: 45px 55px;
+      border-radius: 40px;
       text-align: center;
-      animation: floatCard 4s ease-in-out infinite;
+      box-shadow: 0 15px 35px rgba(255, 143, 177, 0.2);
+      border: 3px solid #fff;
+      animation: pulsarSuave 3s ease-in-out infinite;
     }
 
-    /* Anel de luz orbital giratório atrás do texto */
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: 30px;
-      background: conic-gradient(from 0deg, transparent 0%, #ff2a85 25%, transparent 50%, #7928ca 75%, transparent 100%);
-      z-index: -1;
-      animation: rotateGlow 6s linear infinite;
-      opacity: 0.7;
-    }
-
-    /* Tipografia de MAJU */
+    /* Nome MAJU */
     .nome-maju {
-      font-family: 'Cinzel Decorative', cursive;
-      font-size: clamp(3.5rem, 12vw, 7rem);
+      font-family: 'Fredoka', cursive;
+      font-size: clamp(3.8rem, 14vw, 6.5rem);
       font-weight: 700;
-      letter-spacing: 6px;
-      background: linear-gradient(135deg, #fff 0%, #ffb6c1 40%, #ff2a85 70%, #ffd700 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 20px rgba(255, 42, 133, 0.6));
-      line-height: 1.1;
+      color: #ff6584;
+      text-shadow: 
+        3px 3px 0px #ffd3e2,
+        6px 6px 0px rgba(255, 182, 193, 0.4);
+      letter-spacing: 4px;
+      line-height: 1;
+      display: inline-block;
     }
 
-    /* Tipografia da frase */
+    /* Frase Maju do Jacim */
     .frase-jacim {
-      font-family: 'Montserrat', sans-serif;
-      margin-top: 15px;
-      font-size: clamp(0.9rem, 3.5vw, 1.4rem);
+      font-family: 'Quicksand', sans-serif;
+      margin-top: 14px;
+      font-size: clamp(1.1rem, 4.5vw, 1.6rem);
       font-weight: 600;
-      letter-spacing: 8px;
-      text-transform: uppercase;
-      color: #f7e6ff;
-      text-shadow: 0 0 10px rgba(255, 42, 133, 0.8), 0 0 20px rgba(121, 40, 202, 0.6);
-      animation: pulseText 2s ease-in-out infinite alternate;
+      color: #845ec2;
+      background: #fbf0f8;
+      padding: 8px 22px;
+      border-radius: 20px;
+      display: inline-block;
+      box-shadow: 0 4px 10px rgba(132, 94, 194, 0.1);
     }
 
-    @keyframes floatCard {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-12px); }
+    /* Partículas do toque */
+    .coracao-rastro {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.5rem;
+      transform: translate(-50%, -50%);
+      animation: flutuarRastro 0.8s forwards ease-out;
+      z-index: 3;
     }
 
-    @keyframes rotateGlow {
-      100% { transform: rotate(360deg); }
+    /* Animações */
+    @keyframes pulsarSuave {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-8px) scale(1.02);
+      }
     }
 
-    @keyframes pulseText {
-      0% { opacity: 0.7; transform: scale(0.98); }
-      100% { opacity: 1; transform: scale(1.02); }
+    @keyframes flutuarNuvem {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(100vw + 250px)); }
+    }
+
+    @keyframes flutuarRastro {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -100%) scale(1.3) rotate(15deg);
+      }
     }
   </style>
 </head>
 <body>
 
-  <canvas id="trailCanvas"></canvas>
+  <div class="nuvem nuvem-1"></div>
+  <div class="nuvem nuvem-2"></div>
 
-  <div class="card">
-    <h1 class="nome-maju">MAJU</h1>
-    <p class="frase-jacim">Maju do Jacim</p>
+  <div class="card-fofo">
+    <h1 class="nome-maju">Maju</h1>
+    <br>
+    <span class="frase-jacim">🌸 Maju do Jacim 🌸</span>
   </div>
 
   <script>
-    const canvas = document.getElementById('trailCanvas');
-    const ctx = canvas.getContext('2d');
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    const fofuras = ['💖', '🌸', '✨', '🎀', '🫧', '💕'];
 
-    window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    });
+    function soltarFofura(x, y) {
+      const item = document.createElement('span');
+      item.className = 'coracao-rastro';
+      item.innerText = fofuras[Math.floor(Math.random() * fofuras.length)];
+      item.style.left = x + 'px';
+      item.style.top = y + 'px';
 
-    const particles = [];
-    const colors = ['#ff2a85', '#ff7300', '#ffd700', '#c77dff', '#ffffff'];
+      document.body.appendChild(item);
 
-    function addParticle(x, y) {
-      for (let i = 0; i < 3; i++) {
-        particles.push({
-          x: x + (Math.random() - 0.5) * 10,
-          y: y + (Math.random() - 0.5) * 10,
-          size: Math.random() * 6 + 2,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          alpha: 1,
-          vx: (Math.random() - 0.5) * 2,
-          vy: (Math.random() - 0.5) * 2
-        });
-      }
+      setTimeout(() => {
+        item.remove();
+      }, 800);
     }
 
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-
-      for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        p.alpha -= 0.025;
-        p.size *= 0.96;
-
-        if (p.alpha <= 0 || p.size <= 0.5) {
-          particles.splice(i, 1);
-          continue;
-        }
-
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = p.color;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      }
-
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-
+    // Touch no celular
     window.addEventListener('touchmove', (e) => {
       const touch = e.touches[0];
-      addParticle(touch.clientX, touch.clientY);
+      soltarFofura(touch.clientX, touch.clientY);
     });
 
+    // Mouse no PC
     window.addEventListener('mousemove', (e) => {
-      addParticle(e.clientX, e.clientY);
+      soltarFofura(e.clientX, e.clientY);
     });
   </script>
 </body>
